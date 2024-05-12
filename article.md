@@ -184,7 +184,11 @@ This is fundamentall the same chart but we have specified the x axis in a differ
 
 ![](images/alt-scatter2.png)
 
+We completed the first task. Altair has givens us perfectly good charts with not too much effort.
+
 ### Bokeh
+
+
 
 ### Matplotlib
 
@@ -198,7 +202,7 @@ This is fundamentall the same chart but we have specified the x axis in a differ
 
 1. [Vega-Lite: A Grammar of Interactive Graphics](http://vis.csail.mit.edu/pubs/vega-lite), Arvind Satyanarayan, Dominik Moritz, Kanit Wongsuphasawat and Jeffrey Heer, *IEEE Transactions on Visualization & Computer Graphics (Proc. IEEE InfoVis)*, 2017
 
-2. The Grammar of Graphics (Statistics and Computing) 2nd Edition (2005), by Leland Wilkinson is listed on [Amazon](https://amzn.to/3HVR3mS). It’s not cheap!
+2. Leland Wilkinson's seminal, The Grammar of Graphics (Statistics and Computing) 2nd Edition (2005), is listed on [Amazon](https://amzn.to/3HVR3mS). It’s not cheap!
 
 3. [Altair: Interactive Statistical Visualizations for Python](https://joss.theoj.org/papers/10.21105/joss.01057), Jacob VanderPlas, et al. _Journal of Open Source Software, 3(32), 1057
 
