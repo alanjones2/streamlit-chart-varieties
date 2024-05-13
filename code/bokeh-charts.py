@@ -10,7 +10,8 @@ st.table(cryptoW)
 # create a new plot with a title and axis labels
 p = figure(title="Line chart ETH and BTC prices", 
           x_axis_label="Month", 
-          y_axis_label="Value (USD)")
+          y_axis_label="Value (USD)",
+          width=800)
 
 # add a line renderer with legend and line thickness
 p.line(cryptoW['Month'], 
@@ -24,13 +25,15 @@ p.line(cryptoW['Month'],
     color = "green",
     line_width=2)
 p.legend.location = "top_left"
+
 st.bokeh_chart(p)
 
 # Scatter
 # add a circle renderer with x and y coordinates, size, color, and alpha
 p = figure(title="Scatter chart BTC/ETH", 
           x_axis_label="BTC", 
-          y_axis_label="ETH")
+          y_axis_label="ETH",
+          width=800)
 
 p.circle(cryptoW['BTC'], cryptoW['ETH'], size=8) 
 
@@ -56,7 +59,8 @@ st.bokeh_chart(p)
 from bokeh.transform import dodge
 p = figure(title="Grouped bar", 
           x_axis_label="Month", 
-          y_axis_label="Value (USD)")
+          y_axis_label="Value (USD)",
+          width=800)
 width = 0.4
 
 p.vbar(

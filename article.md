@@ -22,7 +22,7 @@ Below is a screenshot of the data that we will use.
 
 ![](images/crypto-data.png)
 
-This is wide format data which while entirely suitable for human readers. This wide format shows the different observations (here, the closing prices) in seperate columns (here, headed ETH and BTC).   However, some data visulaization packages (as we shall see) require the data to be presented in _long_ format where the observations are in a single column and seperate column contains a label for the observation.
+This is wide format data which while entirely suitable for human readers and, for this article, this data is in the file *crypto-23.csv* . This wide format shows the different observations (here, the closing prices) in seperate columns (here, headed ETH and BTC).   However, some data visulaization packages (as we shall see) require the data to be presented in _long_ format where the observations are in a single column and seperate column contains a label for the observation.
 
 If the data we see above is in the form af a Pandas dataframe (which it is!), we can create a new dataframe in long format using the Pandas `melt()`function in the following Python code.
 
@@ -72,7 +72,7 @@ So, we will create the three graphs in each of Altair, Bokeh, Matplotlib, Pandas
 
 ### Altair
 
-Altair[3] is a graphing library based on the concept of the Grammar of Graphics [1,2]. Instead of implementing specific chart types, with Altair you start with the data and then decide hoe that data is mapped onto the various aspects of a graphical representation. (I have written about Altair in detail in the article [Mastering Data Visualizaton with Altair’s Grammar of Graphics](https://medium.com/towards-data-science/altair-and-the-powerful-vega-lite-grammar-of-graphics-d1d864c3e08e).)
+Altair[3] is a graphing library based on the concept of the Grammar of Graphics [2]. Instead of implementing specific chart types, with Altair you start with the data and then decide how that data should be mapped onto the various aspects of a graphical representation. (For a more detailed look at Altair, please see my article [Mastering Data Visualizaton with Altair’s Grammar of Graphics](https://medium.com/towards-data-science/altair-and-the-powerful-vega-lite-grammar-of-graphics-d1d864c3e08e).)
 
 To implement the three graphs we first need to included the libraries and import the data.
 
