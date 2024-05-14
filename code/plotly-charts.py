@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.express as px
 
 cryptoW = pd.read_csv("crypto-23.csv")
-
-cryptoL = cryptoW.melt(value_vars=['ETH','BTC'],var_name='Name',id_vars=['Month'])
+cryptoL = cryptoW.melt(value_vars=['ETH','BTC'],
+                       var_name='Name',id_vars=['Month'])
 
 # Display data
 col1, col2 = st.columns(2)
@@ -21,13 +21,16 @@ fig = px.line(cryptoW, x="Month", y="BTC", title='BTC values')
 st.plotly_chart(fig)
 
 # Line chart with both ETH and BTC requires long data
-fig = px.line(cryptoL, x="Month", y="value", color='Name', title='BTC and ETH values')
+fig = px.line(cryptoL, x="Month", y="value", 
+              color='Name', title='BTC and ETH values')
 st.plotly_chart(fig)
 
 # Grouped bar chart
-fig = px.bar(cryptoL, x="Month", y="value", color="Name", barmode='group', title='BTC and ETH values')
+fig = px.bar(cryptoL, x="Month", y="value", color="Name", 
+             barmode='group', title='BTC and ETH values')
 st.plotly_chart(fig)
 
 # Scatter plot with trend line
-fig = px.scatter(cryptoW, x="ETH", y="BTC", trendline="ols", title='ETH values')
+fig = px.scatter(cryptoW, x="ETH", y="BTC", 
+                 trendline="ols", title='ETH/BTC values')
 st.plotly_chart(fig)
