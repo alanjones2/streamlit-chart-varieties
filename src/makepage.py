@@ -15,8 +15,8 @@ IMAGE = params['image']
 
 TEMPLATE = 'template.html'
 ARTICLE_FILE = "../article.md"
-FILE_NAME = urllib.parse.quote(TITLE.replace(" ", "_"))+".html"
-
+#FILE_NAME = urllib.parse.quote(TITLE.replace(" ", "_"))+".html"
+FILE_NAME = "index.html"
 
 
 with open(f'{ARTICLE_FILE}', 'r') as reader:
