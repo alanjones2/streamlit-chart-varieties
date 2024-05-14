@@ -1,13 +1,10 @@
 ### Code to accompany the article:
 
-<<<<<<< HEAD
 # []() add article url here
 =======
-# []()>>>>>>> 575ec5db3bf82237d0f7b6114dcc81c009e4e5c3
 
 
 
-You can see a demo [here]()
 
 ---
 ### If you find this content useful, please consider one or more of the following:

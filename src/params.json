@@ -1,8 +1,8 @@
 {
-    "title":"Title",
-    "subtitle":"Subtitle",
-    "image":"",
+    "title":"Streamlit Supports 5 Important Data Visualization Libraries - Which to Choose?",
+    "subtitle":"We code examples using Altair, Bokeh, Plotly, Pandas Plot and Matplotlib, to illustrate the pros and cons of each oneubtitle",
+    "image":"./images/rowcharts.png",
     "demoURL":"None",
     "code":"./code",
-    "tags":"Python DataVisualization DataScience"
+    "tags":"Python DataVisualization DataScience Streamlit"
 }

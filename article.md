@@ -1,6 +1,4 @@
-# Streamlit Supports 5 Important Data Visualization Libraries - Which to Choose?
-
-## We code examples using Altair, Bokeh, Plotly, Pandas Plot and Matplotlib, to illustrate the pros and cons of each one
+# 
 
 Imagine your organisation has decided to use Streamlit as its primary platform for showcasing data visualization applications and, to ensure a consistent look, it wants to adopt a single graphing library to be used across all applications. And, let's say, your job is to investigate which is most appropriate.
 
@@ -10,9 +8,7 @@ Let's take a look at each one and code up some commonly used charts.
 
 The data that we will use is a set of price data for a pair of cryptocurrencies and from that data we will create a line chart showing the change in closing prices over a year for both currencies, a grouped bar chart showing the same data, again, for both currencies and a scatter chart with a trendline showing the correlation between the change in value of the two currencies.
 
-The charts will look similar to the ones in the image below.
-
-![](./images/rowcharts.png)
+The charts will look similar to the ones in the image above.
 
 ### The data
 
@@ -84,7 +80,6 @@ import altair as alt
 cryptoW = pd.read_csv("crypto-23.csv")
 cryptoL = cryptoW.melt(value_vars=['ETH','BTC'],
           var_name='Name',id_vars=['Month'])
-
 ```
 
 We import the Streamlit package, of course, along with Pandas and Altair. The data is in a _CSV_ file and, as you can see we import the _wide_ version in `cryptoW`,  and then create a _long_ version of the data in the variable `cryptoL`.
@@ -106,10 +101,6 @@ st.altair_chart(fig)
 We specify the dataframe that we are going to use as a parameter (there are other parameters that we could include, here we set the title and width). The `mark_line()` method specifies that we want the data represented as a line and the encodings that follow determine the way the data is mapped onto the chart: the month is on the `x` axis, the value on the `y`axis and the `color`is specified by the name of the currency. Note that the codes appended to the names of the data fields are Altair types, `O`is ordinal, `Q`is qualitative and `N`is nominal.
 
 The resulting graph is shown below. (In this rendition, the text is not very easy to see but the title, x and y label and the legend are perfectly visible in the Streamlit app).
-
- 
-
-
 
 ![](images/alt-line.png)
 
@@ -230,17 +221,11 @@ st.bokeh_chart(p)
 
 Below we can see the resulting graph.
 
-
-
-
-
 ![](images/bokeh_line.png)
 
 The result is, of course, similar to the Altair version but with a slightly different style.
 
 The grouped bar chart is very similar but uses the `vbar()`function to plot the data, and like the Altair version would default to a stacked bar. With Bokeh we can use `dodge()`as a parameter which shifts the bars horizontally. First, we set a width for the bars (a full bar would have a width of 1 but since there are two bars they should be a maximum of 0.5 each. Here we set them to 0.4 so there is a gap between them). We then we use the width divided by 2 to set the offset for each bar.  
-
-
 
 ```python
 from bokeh.transform import dodge
@@ -527,7 +512,7 @@ And the resulting figure is shown below.
 
 When is comes to the scatter chart, Plotly provides built in trendline functionality. This require the inclusion of the _statsmodels_ library which, while not imported, must be installed.
 
-``` python
+```python
 fig = px.scatter(cryptoW, x="ETH", y="BTC", 
                  trendline="ols", title='ETH/BTC values')
 st.plotly_chart(fig)
@@ -541,15 +526,33 @@ That completes the set of charts for Plotly and for the whole exercise.
 
 ### So, where does that leave us
 
-In terms of what the charts shows us, the line and bar charts illustrate the prices for these cryptocurrencies being pretty volatile and the scatter charts confirm what we can also see in the other charts that the two currencies tend to go up and down together - general sentiment about cryptocurrencies probably affect the value of most, if not all, of them.
+In terms of what the charts shows us, the line and bar charts illustrate the prices for these cryptocurrencies being pretty volatile and the scatter charts confirm what we can also see in the other charts that the two currencies tend to go up and down together - general sentiment about cryptocurrencies probably affects the value of most, if not all, of them.
 
 But what about the libraries.
 
-All of the libraries do a reasonable job although you find some charts more attractive than others - the Matplotlib charts look a little more clunky than the others, for example (although this may mainly to do with the large font which can be easily changes with a little extra code, for example, `matplotlib.rcParams['font.size'] = 8`)
+All of the libraries do a reasonable job although you find some charts more attractive than others - the Matplotlib charts look a little more clunky than the others, for example (although this may mainly to do with the large font which can be easily changed with a little extra code, for example, `matplotlib.rcParams['font.size'] = 8` will reduce the size of all off the text in a figure and this being a global setting will affect all plots that are created after it is executed).
+
+With a little effort you can customize any of the charts that we've looked at either by adjusting particular aspcts of a plot such as the height and width, or by adopting a different style sheet.
+
+What is important ot the programmer, of course, is the ease with which you can code these figures. It's fair to say that the library that has the most compact code is Plotly Express, followed closely by Pandas Plots. With Altair, Bokeh and Matplotlib you need to do a little more work though working with any of the packages is fairly straightforward.
+
+Another thing that might  sway your decision is the philosophy behind the libraries. 
+
+Altair uses a Grammar of Graphics approach where you decide what you want to do with the data, whereas the others tend to favour solutions to standard problems by including a fixed library of chart types.
+
+Matplotlib makes you build your charts from the bottom up and has a whole bunch of methods for adjusting and customizing graphs. Pandas Plots simplifies the Matplotlib approach but maintains its flexibility -  Matplotlib parameters and functions work with Pandas charts, too.
+
+Bokeh, again, provides a lot of flexibility with the downside that you need to write more code than in other libraries.
+
+Plotly, last but not least, provides a large number of fixed chart types and they are each customizable. If compact code is important then Plotly is probably the winner in this respect.
+
+The decision is yours (or your organisation's). I could have simply stated my own preference at the beginning but the purpose of showing you the code is so you cab judge for yourself.
+
+---
+
+Thanks for reading and I hope this has been helpful. You can find all of the above code and data in the [GitHub repo]([streamlit-chart-varieties/code at main · alanjones2/streamlit-chart-varieties · GitHub](https://github.com/alanjones2/streamlit-chart-varieties/tree/main/code)) for this article in the form of Streamlit programs. Feel free to download them for your reference.
 
 
-
-### Code
 
 ### Notes
 

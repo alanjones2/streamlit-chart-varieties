@@ -14,7 +14,7 @@ SUBTITLE = params['subtitle']
 IMAGE = params['image']
 
 TEMPLATE = 'template.html'
-ARTICLE_FILE = "article.md"
+ARTICLE_FILE = "../article.md"
 FILE_NAME = urllib.parse.quote(TITLE.replace(" ", "_"))+".html"
 
 
@@ -31,7 +31,7 @@ template = env.get_template(TEMPLATE)
 
 output = template.render(content=content, title = TITLE, subtitle = SUBTITLE, image = IMAGE)
 print(FILE_NAME)
-f = FILE_NAME
+f = f"../{FILE_NAME}"
 print(f)
 file = open(f,'w')
 file.write(output)
