@@ -82,14 +82,13 @@
                 <div><img alt="" src="./images/rowcharts.png">
                 </div>
 
-                <h1></h1>
-<p>Imagine your organisation has decided to use Streamlit as its primary platform for showcasing data visualization applications and, to ensure a consistent look, it wants to adopt a single graphing library to be used across all applications. And, let's say, your job is to investigate which is most appropriate.</p>
+                <p>Imagine your organisation has decided to use Streamlit as its primary platform for showcasing data visualization applications and, to ensure a consistent look, it wants to adopt a single graphing library to be used across all applications. And, let's say, your job is to investigate which is most appropriate.</p>
 <p>You are spoiled for choice! There are 5 libraries you can use for coding your data visualizations: Altair, Bokeh, Plotly, Pyplot (Matplotlib) and Vega Lite. And Streamlit provides some native charts, as well.</p>
 <p>Let's take a look at each one and code up some commonly used charts. </p>
 <p>The data that we will use is a set of price data for a pair of cryptocurrencies and from that data we will create a line chart showing the change in closing prices over a year for both currencies, a grouped bar chart showing the same data, again, for both currencies and a scatter chart with a trendline showing the correlation between the change in value of the two currencies.</p>
 <p>The charts will look similar to the ones in the image above.</p>
 <h3>The data</h3>
-<p>The dataset we will use is a simple three-column table. It tracks the closing prices of two cryptocurrencies over a 12-month period. It is not important for the exercise but the currencies are Ethereum and Bitcoin and the period is the previous 12 months from the time of writing. (The data are a matter of public record and are available from several sources. I retrieved them from <a href="[Crypto Real Time Prices &amp; Latest News - Yahoo Finance](https://finance.yahoo.com/crypto/)">Yahoo Finance</a>.)</p>
+<p>The dataset is a simple three-column table. It tracks the closing prices of two cryptocurrencies over a 12-month period. It is not important for the exercise but the currencies are Ethereum and Bitcoin and the period is the previous 12 months from the time of writing. (The data are a matter of public record and are available from several sources. I retrieved them from <a href="[Crypto Real Time Prices &amp; Latest News - Yahoo Finance](https://finance.yahoo.com/crypto/)">Yahoo Finance</a>.)</p>
 <p>Below is a screenshot of the data that we will use.</p>
 <p><img alt="" src="images/crypto-data.png" /></p>
 <p>This representation of the data is <em>wide format</em> with each observation (the closing price) in its own column. For this article, this data is assumed to be in the file <em>crypto-23.csv</em> . This wide format shows the different observations (here, the closing prices) in seperate columns (headed ETH and BTC) and is entirely suitable for human readers. However, some data visualization packages require the data to be presented in <em>long</em> format where the observations are in a single column and seperate column contains a label for the observation.</p>
@@ -98,12 +97,12 @@
           var_name='Name',
           id_vars=['Month'])
 </code></pre>
-<p>You can look up <code>melt</code>in the <a href="https://pandas.pydata.org/docs/reference/api/pandas.melt.html">Pandas documentation</a> but basically this code creates a new column called <em>Name</em> which contains the values from the original columns <em>ETH</em> and <em>BTC</em>. The <em>Month</em> column remains a single column but it is expanded lengthwise to match <em>Name</em> and the values for the months are repeated as required. The result can be seen in the image below.</p>
+<p>You can look up <code>melt</code>in the <a href="https://pandas.pydata.org/docs/reference/api/pandas.melt.html">Pandas documentation</a> but basically this code creates a column called <em>value</em> which contains the values from the original columns <em>ETH</em> and <em>BTC</em>. The <em>Month</em> column remains a single column but it is expanded lengthwise to match <em>value</em> and the numbers of the months are repeated as required. A new column <em>Name</em> is created that will contain the value <em>ETH</em> or <em>BTC</em> and labels the <em>value</em> in the same row. The result can be seen in the image below.</p>
 <p><img alt="" src="images/crypto-data-long.png" /></p>
 <h3>The charts</h3>
 <p>More specifically the charts that we want to create are:</p>
-<p><em>Line chart</em>: The line chart should track both currencies over the period and show two seperate lines of different colours for each currency.</p>
-<p><em>Bar chart</em>: the bar chart should be a grouped bar chart that tracks the two currencies over the period. The bars should be vertical and grouped such that the pair of currencies are shown next to each other in each month. The bar for each curreny should be coloured differently.</p>
+<p><em>Line chart</em>: The line chart should track both currencies over the period and show two seperate lines of different colours, one for each currency.</p>
+<p><em>Bar chart</em>: the bar chart should be a grouped bar chart that tracks the two currencies over the period. The bars should be vertical and grouped such that the pair of currencies are shown next to each other in each month. The bar for each currency should be coloured differently.</p>
 <p><em>Scatter chart</em>: The scatter chart should show the relationship between the closing prices of each currency and in addition show include a trendline to indicate the linearity (or otherwise) of that relationship.</p>
 <p>Additionally, all charts should have a title and appropriate labels on the x and y axes.</p>
 <h3>The options</h3>
@@ -112,9 +111,9 @@
 <p>The first thing we should look at is the set of built-in functions that Streamlit provides. They will draw simple line charts, bar charts and scatter plots. And, as the documentation states, these are simply wrappers around the Altair equivalents. The documentation also suggests that if these simple charts don't work for you, you should use the Altair charts, instead.</p>
 <p>A quick look at the documentation will confirm that these charts cannot produce any of the three charts in this exercise as they cannot display more than one trace per chart. We won't explore these any further.</p>
 <p><strong>Vega-Lite</strong></p>
-<p>Vega-Lite is a powerful graphing language that specifies charts in a JSON format [1]. Writing a Vege-Lite specification can be an arduous and error-prone task which is why Altair was developed. Altair is a Python library that outputs Vega-Lite specs, so If you already have Vega-Lite specifications to hand then the Vega-Lite library is the obvious one to use. But to create a chart from scratch it has to be better to use the Altair library which is a Python-friendly way of producing the same thing.</p>
+<p>Vega-Lite is a powerful graphing language that specifies charts in a JSON format [1]. Writing a Vega-Lite specification can be an arduous and error-prone task which is why Altair was developed. Altair is a Python library that outputs Vega-Lite specs, so If you already have Vega-Lite specifications to hand then the Vega-Lite library is the obvious one to use. But to create a chart from scratch it has to be better to use the Altair library which is a Python-friendly way of producing the same thing. We won't explore Vega-Lite any further, either.</p>
 <p><strong>The rest</strong></p>
-<p>The remaining libraries are all powerful and Python-friendly ways of producing sophisticated charts and we will explore them further. But we'll look at one of the libraries in two ways.'</p>
+<p>The remaining libraries are all powerful and Python-friendly ways of producing sophisticated charts and these we will explore further. But we'll look at one of the libraries in two ways.</p>
 <p>Streamlit's <code>st.pyplot()</code>function is a way of displaying Matplotlib figures but, of course, there are other plotting libraries that are built on Matplotlib: Seaborn, Plotnine and Pandas Plots, for example. To show how we can use these we will include a version of the graphs created with Pandas Plots in addition to those created directly in Matplotlib.</p>
 <p>So, we will create the three graphs in each of Altair, Bokeh, Matplotlib, Pandas Plots and Plotly.</p>
 <h3>Altair</h3>
@@ -156,7 +155,7 @@ st.altair_chart(fig)
 
 st.altair_chart(fig)
 </code></pre>
-<p>You can see the result below (the earler comment applies to the text here, too).</p>
+<p>You can see the result below (the earlier comment applies to the text here, too).</p>
 <p><img alt="" src="images/alt-bar.png" /></p>
 <p>The scatter chart is slightly more complicated because we want to include a trendline</p>
 <p>The code below is very similar to the other charts but here we use the wide form of the data and the method <code>mark_point()</code>. The x and y data are the two currencies.</p>
@@ -170,7 +169,7 @@ st.altair_chart(fig)
 <p>As it stands that code would be sufficient to draw a scatter chart. To add the trendline we need to do a little more work.</p>
 <pre><code class="language-python">trend = fig.transform_regression('BTC', 'ETH').mark_line()
 </code></pre>
-<p>Altair has built-in transfom functions and here we use the function <code>transform_regression()</code>to create a line chart of <code>ETH</code>versus <code>BTC</code>.</p>
+<p>Altair has built-in transform functions and here we use the function <code>transform_regression()</code>to create a line chart of <code>ETH</code>versus <code>BTC</code>.</p>
 <p>To combine the two charts we simply 'add' them together.</p>
 <pre><code class="language-python">st.altair_chart(fig + trend)
 </code></pre>
@@ -188,11 +187,11 @@ trend = fig.transform_regression('BTC', 'ETH').mark_line()
 
 st.altair_chart(fig + trend)
 </code></pre>
-<p>This is fundamentall the same chart but we have specified the x axis in a different way (using the <code>alt.X()</code> function). By doing this we can pass values for the scale and here we specifiy thay the x scale should begin at 20000 and end at 70000. This code gives us a better rendition.</p>
+<p>This is fundamentally the same chart but we have specified the x axis in a different way (using the <code>alt.X()</code> function). By doing this we can pass values for the scale and here we specify that the x scale should begin at 20000 and end at 70000. This code gives us a better rendition.</p>
 <p><img alt="" src="images/alt-scatter2.png" /></p>
 <p>We have completed the first task. Altair has givens us perfectly good charts with not too much effort.</p>
 <h3>Bokeh</h3>
-<p>The Bokeh library has a similar feel to Altair in that it starts with  a figure object and builds the chart chat that. But the figure specifies mostly decorative elements of the chart. The graphical elements are built on topp as attributes to the figure object.</p>
+<p>The Bokeh library has a similar feel to Altair in that it starts with  a figure object and builds the chart chat that. But the figure specifies mostly decorative elements of the chart. The graphical elements are built on top as attributes to the figure object.</p>
 <p>Here's the initial code that imports the library and the data.</p>
 <pre><code class="language-python">import streamlit as st
 import pandas as pd
@@ -220,10 +219,10 @@ p.legend.location = &quot;top_left&quot;
 
 st.bokeh_chart(p)
 </code></pre>
-<p>As you can see the <code>line()</code>function is invoked twice for each of the currencies (with appropriate labels, colours and line width) and we (optionally) change the default position of the legend to the top left so that it doesn't obscure the lines in the graph.</p>
+<p>As you can see the <code>line()</code>function is invoked twice, once for each of the currencies (with appropriate labels, colours and line width) and we (optionally) change the default position of the legend to the top left so that it doesn't obscure the lines in the graph.</p>
 <p>Below we can see the resulting graph.</p>
 <p><img alt="" src="images/bokeh_line.png" /></p>
-<p>The result is, of course, similar to the Altair version but with a slightly different style.</p>
+<p>The result is, of course, similar to the Altair version but with a different style.</p>
 <p>The grouped bar chart is very similar but uses the <code>vbar()</code>function to plot the data, and like the Altair version would default to a stacked bar. With Bokeh we can use <code>dodge()</code>as a parameter which shifts the bars horizontally. First, we set a width for the bars (a full bar would have a width of 1 but since there are two bars they should be a maximum of 0.5 each. Here we set them to 0.4 so there is a gap between them). We then we use the width divided by 2 to set the offset for each bar.  </p>
 <pre><code class="language-python">from bokeh.transform import dodge
 p = figure(title=&quot;Grouped bar&quot;, 
@@ -278,7 +277,7 @@ st.bokeh_chart(p)
 </code></pre>
 <p>When this line is added to the chart we get the following figure.</p>
 <p><img alt="" src="images/bokeh_scatter.png" /></p>
-<p>Again, a pefectly adequate chart.</p>
+<p>Again, a perfectly adequate chart.</p>
 <h3>Matplotlib</h3>
 <p>Like many libraries, Matplotlib gives us a set of basic chart types to choose from and then provides a set of functions that can modify that chart.</p>
 <p>Matplotlib requires you to engage with your charts at a fairly low level but in doing this gives you a lot of control over the result.</p>
@@ -358,8 +357,8 @@ fig, ax = plt.subplots()
 cryptoW.plot(y='ETH', x='Month', title='ETH values', ax=ax)
 st.pyplot(fig)
 </code></pre>
-<p>You can see that we call a method on the dataframe itself <code>plot()</code>, this will produce a line chart from the parameters given. Note that it is importand that we refer to the <code>ax</code> variable in the call - this effectively adds the new line plot to the figure that we defined at the beginning.</p>
-<p>With Pandas Plots we can specify any number of <code>y</code>variabes by passing a list as a parameter. So, to plot a line chart for both ETH and BTC the code is almost identical.</p>
+<p>You can see that we call a method on the dataframe itself <code>plot()</code>, this will produce a line chart from the parameters given. Note that it is important that we refer to the <code>ax</code> variable in the call - this effectively adds the new line plot to the figure that we defined at the beginning.</p>
+<p>With Pandas Plots we can specify any number of <code>y</code>variables by passing a list as a parameter. So, to plot a line chart for both ETH and BTC the code is almost identical.</p>
 <pre><code class="language-python">fig, ax = plt.subplots()
 cryptoW.plot(y=['BTC','ETH'], x='Month',
              title='BTC and ETH values', ax=ax)
@@ -367,7 +366,7 @@ st.pyplot(fig)
 </code></pre>
 <p>This code is a little shorter than the Matplotlib code as Pandas makes assumptions about the names of the axes - it takes them from the column name by default although you can change this if you wish. The line chart is shown below.</p>
 <p><img alt="" src="images/pyplot-line.png" /></p>
-<p>The grouped bar code is alsmost identical except for the name of the method to be called; here it is <code>plot.bar()</code>rather than simply <code>plot()</code>.</p>
+<p>The grouped bar code is almost identical except for the name of the method to be called; here it is <code>plot.bar()</code>rather than simply <code>plot()</code>.</p>
 <pre><code class="language-python">fig, ax = plt.subplots()
 cryptoW.plot.bar(y=['BTC','ETH'], x='Month', 
                  title='BTC and ETH values', ax=ax)
@@ -375,26 +374,26 @@ st.pyplot(fig)
 </code></pre>
 <p>We don't need to mess around with the positioning of the bars in order to create a grouped set of bars, Pandas defaults to creating a grouped representation when given a list of <code>y</code>values.</p>
 <p><img alt="" src="images/pyplot-bar.png" /></p>
-<p>To create a simple scatter plot we use the method <code>plot.scatter()</code>and otherwise the code is very similar to the other charts. However, to add the trendline we need to create a seperate plot.</p>
+<p>To create a simple scatter plot we use the method <code>plot.scatter()</code>and otherwise the code is very similar to the other charts. However, to add the trendline we need to create a separate plot.</p>
 <p>Below is the code to create the basic scatter plot.</p>
 <pre><code class="language-python">fig, ax = plt.subplots()
 ax = cryptoW.plot.scatter(y='ETH', x='BTC', 
                           title='BTC and ETH values', ax=ax)
 st.pyplot(fig)
 </code></pre>
-<p>As you see it is agin very similar to the preceding code. To add the trendline we create a new column in the dataframe as we did previously.</p>
+<p>As you see it is again very similar to the preceding code. To add the trendline we create a new column in the dataframe as we did previously.</p>
 <pre><code class="language-python">m,b = np.polyfit(cryptoW.BTC, cryptoW.ETH, 1)
 
 # Add a trendline to the dataframe
 cryptoW[&quot;trendline&quot;] = [y for  y in  m*cryptoW.BTC + b]
 </code></pre>
-<p>Now we can plot a line form this new column and by including the existing axis <code>ax</code>, we add this new plotline to the existing figure. </p>
+<p>Now we can plot a line form this new column and by including the existing axis <code>ax</code>, we add this new plot line to the existing figure. </p>
 <pre><code class="language-python">cryptoW.plot(x = 'BTC', y = 'trendline', ax=ax)
 st.pyplot(fig)
 </code></pre>
 <p>And when we plot the figure we get the scatter plot with the trendline as we see below.</p>
 <p><img alt="" src="images/pyplot-scatter.png" /></p>
-<p>Pandas plots gives you all of the flexibility of Matplotlib as you can still use the Matplotlib lobrary to modify the figure using the <code>plt.*</code>methods but the syntax for plotting is a little cleaner when using a Pandas dataframe as the source of the plotting data.</p>
+<p>Pandas plots gives you all of the flexibility of Matplotlib as you can still use the Matplotlib library to modify the figure using the <code>plt.*</code>methods but the syntax for plotting is a little cleaner when using a Pandas dataframe as the source of the plotting data.</p>
 <h3>Plotly</h3>
 <p>Plotly has both high level and low level functions - Plotly Express is the recommended library as it incorporates a large number of standard charts, whereas lower level functions are provided by the Plotly Graphic Objects (GO) part of the package. Plotly, themselves, suggest that you use Plotly Express, which is built upon Plotly GO, and that is what we will do.</p>
 <p>Plotly is generally better used with long format data, so our initial code includes the generation of this form of the data.</p>
@@ -426,23 +425,25 @@ st.plotly_chart(fig)
                  trendline=&quot;ols&quot;, title='ETH/BTC values')
 st.plotly_chart(fig)
 </code></pre>
-<p>In the code above we see the familar pattern of a Plotly plot - and additional parameter <code>trendline</code>  will ensure that the regression line is calculated and drawn with no effort on the preogrammer's part.</p>
+<p>In the code above we see the familiar pattern of a Plotly plot - and additional parameter <code>trendline</code>  will ensure that the regression line is calculated and drawn with no effort on the programmer's part.</p>
 <p><img alt="" src="images/plotly-scatter.png" /></p>
 <p>That completes the set of charts for Plotly and for the whole exercise.</p>
 <h3>So, where does that leave us</h3>
 <p>In terms of what the charts shows us, the line and bar charts illustrate the prices for these cryptocurrencies being pretty volatile and the scatter charts confirm what we can also see in the other charts that the two currencies tend to go up and down together - general sentiment about cryptocurrencies probably affects the value of most, if not all, of them.</p>
 <p>But what about the libraries.</p>
-<p>All of the libraries do a reasonable job although you find some charts more attractive than others - the Matplotlib charts look a little more clunky than the others, for example (although this may mainly to do with the large font which can be easily changed with a little extra code, for example, <code>matplotlib.rcParams['font.size'] = 8</code> will reduce the size of all off the text in a figure and this being a global setting will affect all plots that are created after it is executed).</p>
+<p>All of the libraries do a reasonable job although you might find some charts more attractive than others - the Matplotlib charts look a little more clunky than the others, for example (although this may mainly to do with the large font which can be easily changed with a little extra code, for example, <code>matplotlib.rcParams['font.size'] = 8</code> will reduce the size of all off the text in a figure and this being a global setting will affect all plots that are created after it is executed).</p>
 <p>With a little effort you can customize any of the charts that we've looked at either by adjusting particular aspcts of a plot such as the height and width, or by adopting a different style sheet.</p>
 <p>What is important ot the programmer, of course, is the ease with which you can code these figures. It's fair to say that the library that has the most compact code is Plotly Express, followed closely by Pandas Plots. With Altair, Bokeh and Matplotlib you need to do a little more work though working with any of the packages is fairly straightforward.</p>
 <p>Another thing that might  sway your decision is the philosophy behind the libraries. </p>
 <p>Altair uses a Grammar of Graphics approach where you decide what you want to do with the data, whereas the others tend to favour solutions to standard problems by including a fixed library of chart types.</p>
 <p>Matplotlib makes you build your charts from the bottom up and has a whole bunch of methods for adjusting and customizing graphs. Pandas Plots simplifies the Matplotlib approach but maintains its flexibility -  Matplotlib parameters and functions work with Pandas charts, too.</p>
-<p>Bokeh, again, provides a lot of flexibility with the downside that you need to write more code than in other libraries.</p>
+<p>Bokeh, again, provides a lot of flexibility with the downside that you need to write a little more code than in other libraries.</p>
 <p>Plotly, last but not least, provides a large number of fixed chart types and they are each customizable. If compact code is important then Plotly is probably the winner in this respect.</p>
-<p>The decision is yours (or your organisation's). I could have simply stated my own preference at the beginning but the purpose of showing you the code is so you cab judge for yourself.</p>
+<p>The decision is yours (or your organisation's). I could have simply stated my own preference at the beginning but the purpose of showing you the code is so you can judge for yourself.</p>
 <hr />
 <p>Thanks for reading and I hope this has been helpful. You can find all of the above code and data in the <a href="[streamlit-chart-varieties/code at main · alanjones2/streamlit-chart-varieties · GitHub](https://github.com/alanjones2/streamlit-chart-varieties/tree/main/code)">GitHub repo</a> for this article in the form of Streamlit programs. Feel free to download them for your reference.</p>
+<p>To see more articles like this you can subscribe on <a href="https://medium.com/@alan-jones/subscribe">Medium</a>, subscribe to my free and occasional <a href="technofile.substack.com">newsletter</a> or visit my <a href="alanjones2.github.io">website</a>.</p>
+<hr />
 <h3>Notes</h3>
 <ol>
 <li>
