@@ -548,7 +548,7 @@ The decision is yours (or your organisation's). I could have simply stated my ow
 
 ---
 
-Thanks for reading and I hope this has been helpful. You can find all of the above code and data in the [GitHub repo]([streamlit-chart-varieties/code at main · alanjones2/streamlit-chart-varieties · GitHub](https://github.com/alanjones2/streamlit-chart-varieties/tree/main/code)) for this article in the form of Streamlit programs. Feel free to download them for your reference.
+Thanks for reading and I hope this has been helpful. You can find all of the above code and data in the [GitHub repo](https://github.com/alanjones2/streamlit-chart-varieties/tree/main/code)) for this article in the form of Streamlit programs. Feel free to download them for your reference.
 
 To see more articles like this you can subscribe on [Medium](https://medium.com/@alan-jones/subscribe), subscribe to my free and occasional [newsletter](technofile.substack.com) or visit my [website](alanjones2.github.io).
 
